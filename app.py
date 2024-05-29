@@ -62,12 +62,12 @@ def get_images():
             if image is None:
                 return jsonify({'error': f'Изображение с id {id} не найдено'}), 404
             images_json.append(
-                {'image_key': image.image_name, 'image_data': base64.b64encode(image.image).decode('utf-8')})
+                {'image_name': image.image_name, 'image_data': base64.b64encode(image.image).decode('utf-8')})
         else:
             images = Images.query.all()
             for image in images:
                 images_json.append(
-                    {'image_key': image.image_name, 'image_data': base64.b64encode(image.image).decode('utf-8')})
+                    {'image_name': image.image_name, 'image_data': base64.b64encode(image.image).decode('utf-8')})
     except SQLAlchemyError as error:
         print("Ошибка получения данных из базы данных: ", error)
         return jsonify({'error': 'Ошибка при получении данных'}), 500
